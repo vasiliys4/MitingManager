@@ -25,8 +25,7 @@ namespace MitingManager.Model.Operations
             {
                 Console.WriteLine("Встречу нельзя назначить на прошлое");
                 AddDate(Meeting);
-            }
-            Console.WriteLine("Введите время окончания");            
+            }         
             return Meeting;
         }
         private DateTime AddDate(Meeting Meeting)
@@ -43,13 +42,15 @@ namespace MitingManager.Model.Operations
                 Console.WriteLine("Введите время окончания встречи\nформат hh:mm");
                 var TimeEnd = Console.ReadLine();
                 var timeEnd = TimeEnd.Split(':');
-                Meeting.MeetingEnd = new(2023, int.Parse(date[1]), int.Parse(timeStart[0]), int.Parse(timeEnd[0]), int.Parse(timeEnd[1]), 00);
+                Meeting.MeetingEnd = new(2023, int.Parse(date[0]), int.Parse(date[1]), int.Parse(timeEnd[0]), int.Parse(timeEnd[1]), 00);
                 if (Meeting.MeetingStart.Hour < Meeting.MeetingEnd.Hour)
                 {
+                    tmp = false;
                     break;
                 }
                 else if (Meeting.MeetingStart.Hour == Meeting.MeetingEnd.Hour && Meeting.MeetingStart.Minute < Meeting.MeetingEnd.Minute)
                 {
+                    tmp = false;
                     break;
                 }
                 Console.WriteLine();
@@ -68,8 +69,7 @@ namespace MitingManager.Model.Operations
             {
                 var tmp = true;
                 while (tmp)
-                {
-                    AddDate(Meeting);
+                {                    
                     tmp = false;
                     for (int i = 0; i < meetings.Count; i++)
                     {
@@ -78,12 +78,14 @@ namespace MitingManager.Model.Operations
                             if (Meeting.MeetingStart.Hour < meetings[i].MeetingStart.Hour && Meeting.MeetingEnd.Hour > meetings[i].MeetingStart.Hour)
                             {
                                 Console.WriteLine("Встречи пересекаются");
+                                AddDate(Meeting);
                                 tmp = true;
                                 break;
                             }
                             if (Meeting.MeetingEnd.Hour > meetings[i].MeetingStart.Hour && Meeting.MeetingStart.Hour < meetings[i].MeetingEnd.Hour)
                             {
                                 Console.WriteLine("Встречи пересекаются");
+                                AddDate(Meeting);
                                 tmp = true;
                                 break;
                             }
@@ -92,12 +94,14 @@ namespace MitingManager.Model.Operations
                                 if (Meeting.MeetingStart.Minute < meetings[i].MeetingStart.Minute && Meeting.MeetingEnd.Minute > meetings[i].MeetingStart.Minute)
                                 {
                                     Console.WriteLine("Встречи пересекаются");
+                                    AddDate(Meeting);
                                     tmp = true;
                                     break;
                                 }
                                 if (Meeting.MeetingEnd.Minute > meetings[i].MeetingStart.Minute && Meeting.MeetingStart.Minute < meetings[i].MeetingEnd.Minute)
                                 {
                                     Console.WriteLine("Встречи пересекаются");
+                                    AddDate(Meeting);
                                     tmp = true;
                                     break;
                                 }

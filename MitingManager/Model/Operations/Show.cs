@@ -23,6 +23,7 @@ namespace MitingManager.Model.Operations
         }
         public List<Meeting> ShowMeeting(DateOnly dateOnly, List<Meeting> MeetingList)
         {
+            MeetingList.Clear();
             for (var i = 0; i < meetings.Count; i++)
             {
                 if (meetings[i].MeetingStart.Month == dateOnly.Month && meetings[i].MeetingStart.Day == dateOnly.Day)

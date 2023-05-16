@@ -10,13 +10,17 @@ namespace MitingManager.Model.Operations
 {
     internal class ExportInFile
     {
-        public void Export(List<Meeting> MeetingList)
+        public async void Export(List<Meeting> MeetingList)
         {
             var path = @"note.txt";
-            using (StreamWriter writer = new StreamWriter(path, false))
-            {
-                writer.WriteLine(MeetingList);
-            }
+            StreamWriter writer = new StreamWriter(path, true);
+                foreach (Meeting meeting in MeetingList)
+                {
+                    writer.WriteLine(meeting.Description);
+                    writer.WriteLine(meeting.MeetingStart);
+                    writer.WriteLine(meeting.MeetingEnd);
+                }
+            writer.Close();
         }
     }
 }

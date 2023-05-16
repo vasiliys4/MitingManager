@@ -61,6 +61,7 @@ internal class Program
                     {
 
                     }
+                    Console.Clear();
                     break;
                 case "4":
                     Console.Clear();
